@@ -2,6 +2,7 @@ package com.example.miniprojet.API;
 
 import android.os.AsyncTask;
 
+import com.example.miniprojet.Adapter.SuperBowlAdapter;
 import com.example.miniprojet.Model.SuperBowl;
 
 import org.json.JSONException;
@@ -17,18 +18,22 @@ import java.util.ArrayList;
 
 public class Async_task_data extends AsyncTask<Object,Void,Boolean>  {
     private ArrayList<SuperBowl>  superBowlArrayList;
+    private SuperBowlAdapter adapter;
+
     public void onPostExecute(Boolean flag){
+        adapter.notifyDataSetChanged();
         //mettre l'adaptateur et le retour pour le main
 
-        for (int i=0; i < superBowlArrayList.size();i++){
+       /* for (int i=0; i < superBowlArrayList.size();i++){
             System.out.println(superBowlArrayList.get(i).toString());
-        }
+        }*/
     }
 
     @Override
     protected Boolean doInBackground(Object... objects) {
        try {
            superBowlArrayList = (ArrayList<SuperBowl>) objects[0];
+           adapter = (SuperBowlAdapter) objects[1];
            JSONObject data = getJSONObjectFromURL();
 
            //Key for parse Json
@@ -37,7 +42,6 @@ public class Async_task_data extends AsyncTask<Object,Void,Boolean>  {
            for (int j = 0; j < tmpKey.getJSONArray("facet").length(); j++) {
                key.add(tmpKey.getJSONArray("facet").get(j).toString());
            }
-
 
            for (int i = 0; i< data.getJSONArray("records").length(); i++) {
                JSONObject tmp = (JSONObject) data.getJSONArray("records").get(i);
@@ -87,10 +91,8 @@ public class Async_task_data extends AsyncTask<Object,Void,Boolean>  {
         urlConnection.setDoOutput(true);
         urlConnection.connect();
 
-
         BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
         StringBuilder sb = new StringBuilder();
-
 
         String line;
         while ((line = br.readLine()) != null) {
@@ -99,12 +101,8 @@ public class Async_task_data extends AsyncTask<Object,Void,Boolean>  {
         br.close();
 
         String jsonString = sb.toString();
-
-
         return new JSONObject(jsonString);
     }
-
-
 }
 
 
