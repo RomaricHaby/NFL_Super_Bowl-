@@ -2,8 +2,11 @@ package com.example.miniprojet;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.miniprojet.API.Async_task_data;
@@ -20,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<SuperBowl> filter = new ArrayList<>();
     private ListView listView;
 
+    private ImageView helmetButton;
+
     //todo check connexion avant affichage
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +34,20 @@ public class MainActivity extends AppCompatActivity {
         setUpList();
         data();
 
+        setButtonImg();
+        //filter();
+    }
 
-        filter();
+    public void setButtonImg(){
+        helmetButton = findViewById(R.id.helmetImageMain);
+
+        helmetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, HelmetTeamActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void data(){

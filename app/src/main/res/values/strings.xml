@@ -2,4 +2,5 @@
     <string name="app_name">NFL Super Bowl</string>
     <string name="icon_nfl">icon NFL</string>
     <string name="developed_by_romaric_haby">Developed by Romaric Haby</string>
+    <string name="helmet">helmet</string>
 </resources>
