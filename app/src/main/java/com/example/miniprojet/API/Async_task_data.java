@@ -22,11 +22,6 @@ public class Async_task_data extends AsyncTask<Object,Void,Boolean>  {
 
     public void onPostExecute(Boolean flag){
         adapter.notifyDataSetChanged();
-        //mettre l'adaptateur et le retour pour le main
-
-       /* for (int i=0; i < superBowlArrayList.size();i++){
-            System.out.println(superBowlArrayList.get(i).toString());
-        }*/
     }
 
     @Override
