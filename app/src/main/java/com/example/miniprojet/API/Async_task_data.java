@@ -18,17 +18,16 @@ import java.util.ArrayList;
 
 public class Async_task_data extends AsyncTask<Object,Void,Boolean>  {
     private ArrayList<SuperBowl>  superBowlArrayList;
-    private SuperBowlAdapter adapter;
 
-    public void onPostExecute(Boolean flag){
-        adapter.notifyDataSetChanged();
+    public void onPostExecute(Boolean f){
+
     }
 
     @Override
     protected Boolean doInBackground(Object... objects) {
        try {
            superBowlArrayList = (ArrayList<SuperBowl>) objects[0];
-           adapter = (SuperBowlAdapter) objects[1];
+
            JSONObject data = getJSONObjectFromURL();
 
            //Key for parse Json

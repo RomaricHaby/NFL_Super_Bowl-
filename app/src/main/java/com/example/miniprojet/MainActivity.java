@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.miniprojet.API.Async_task_data;
 import com.example.miniprojet.Adapter.SuperBowlAdapter;
@@ -29,6 +30,8 @@ import static java.lang.Thread.sleep;
 
 public class MainActivity extends AppCompatActivity {
     private final int requestFiltreTeam = 1;
+
+
     private SuperBowlAdapter adapter;
     public static ArrayList<SuperBowl> superBowlArrayList = new ArrayList<>();
     public static ArrayList<SuperBowl> filter = new ArrayList<>();
@@ -79,8 +82,10 @@ public class MainActivity extends AppCompatActivity {
         constraintLayout = findViewById(R.id.linearLayout);
         cupButton = findViewById(R.id.cup);
 
+        superBowlArrayList = (ArrayList<SuperBowl>) getIntent().getSerializableExtra("list");
         setUpList(superBowlArrayList);
-        data();
+        //data();
+
 
         setButtonImg();
         setButtonCup();
@@ -103,19 +108,26 @@ public class MainActivity extends AppCompatActivity {
                 submitButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(!editText.getText().toString().isEmpty()){
+                            Integer numSuperBowl = Integer.valueOf(editText.getText().toString());
+                            String numSuperBowlRoman = toRoman(numSuperBowl);
 
-                        Integer numSuperBowl = Integer.valueOf(editText.getText().toString());
-                        String numSuperBowlRoman = toRoman(numSuperBowl);
+                            Boolean exist = false;
 
-                        dialog.dismiss();
+                            for (int i = 0; i < superBowlArrayList.size(); i++){
+                                if(numSuperBowlRoman.equals(superBowlArrayList.get(i).getSb())){
+                                    Intent intent = new Intent(MainActivity.this, DetailSuperBowlActivity.class);
+                                    intent.putExtra("superBowl",superBowlArrayList.get(i));
+                                    startActivity(intent);
+                                    exist = true;
+                                }
+                            }
 
-                        for (int i = 0; i < superBowlArrayList.size(); i++){
-                            if(numSuperBowlRoman.equals(superBowlArrayList.get(i).getSb())){
-                                Intent intent = new Intent(MainActivity.this, DetailSuperBowlActivity.class);
-                                intent.putExtra("superBowl",superBowlArrayList.get(i));
-                                startActivity(intent);
+                            if(!exist){
+                                Toast.makeText(MainActivity.this, "This superbowl does not exist!", Toast.LENGTH_SHORT).show();
                             }
                         }
+                        dialog.dismiss();
                     }
                 });
                 dialog.show();
@@ -142,7 +154,9 @@ public class MainActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.SuperBowlListView);
         adapter = new SuperBowlAdapter(getApplicationContext(), 0, list);
         listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
+    
     public void filter(String nameTeam){
         filter.clear();
         for(int i = 0; i < superBowlArrayList.size(); i++){
@@ -150,9 +164,7 @@ public class MainActivity extends AppCompatActivity {
                 filter.add(superBowlArrayList.get(i));
             }
         }
-
         setUpList(filter);
-        adapter.notifyDataSetChanged();
     }
 
     @Override
