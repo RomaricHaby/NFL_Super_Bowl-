@@ -42,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
     //Button menue
     private ConstraintLayout constraintLayout;
+
     private ImageView helmetButton;
     private ImageView cupButton;
+    private ImageView mapButton;
 
 
 
@@ -81,15 +83,25 @@ public class MainActivity extends AppCompatActivity {
         helmetButton = findViewById(R.id.helmetImageMain);
         constraintLayout = findViewById(R.id.linearLayout);
         cupButton = findViewById(R.id.cup);
+        mapButton = findViewById(R.id.map);
 
         superBowlArrayList = (ArrayList<SuperBowl>) getIntent().getSerializableExtra("list");
         setUpList(superBowlArrayList);
-        //data();
-
 
         setButtonImg();
         setButtonCup();
         setTreeMap();
+        setMap();
+    }
+
+    public void setMap(){
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void setButtonCup(){
@@ -145,10 +157,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void data(){
-        new Async_task_data().execute(superBowlArrayList,adapter);
-    }
-
     private void setUpList(ArrayList<SuperBowl> list)
     {
         listView = (ListView) findViewById(R.id.SuperBowlListView);
@@ -156,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
-    
+
     public void filter(String nameTeam){
         filter.clear();
         for(int i = 0; i < superBowlArrayList.size(); i++){
