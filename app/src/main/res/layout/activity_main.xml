@@ -12,7 +12,7 @@
         android:layout_width="409dp"
         android:layout_height="0dp"
         android:layout_marginEnd="2dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,20 +27,41 @@
         android:background="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SuperBowlListView"
         app:layout_constraintVertical_bias="0.0">
 
         <ImageView
+            android:id="@+id/cup"
+            android:layout_width="71dp"
+            android:layout_height="61dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/helmetImageMain"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/cup_super_bowl" />
+
+        <ImageView
             android:id="@+id/helmetImageMain"
-            android:layout_width="83dp"
-            android:layout_height="72dp"
+            android:layout_width="71dp"
+            android:layout_height="61dp"
             android:contentDescription="@string/helmet"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/default_helmet" />
+
+        <ImageView
+            android:id="@+id/map"
+            android:layout_width="71dp"
+            android:layout_height="61dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/helmetImageMain"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/map5" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

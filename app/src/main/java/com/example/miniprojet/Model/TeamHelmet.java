@@ -1,12 +1,26 @@
 package com.example.miniprojet.Model;
 
-public class TeamHelmet {
-    private String name;
-    private  Integer helmet;
+import android.content.Intent;
 
-    public TeamHelmet(String name, Integer helemt) {
+import java.io.Serializable;
+
+public class TeamHelmet implements Serializable {
+    private String name;
+    private Integer helmet;
+    private String color;
+
+    public TeamHelmet(String name, Integer helmet, String color) {
         this.name = name;
-        this.helmet = helemt;
+        this.helmet = helmet;
+        this.color = color;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public String getName() {
@@ -23,5 +37,15 @@ public class TeamHelmet {
 
     public void setHelmet(Integer helmet) {
         this.helmet = helmet;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "TeamHelmet{" +
+                "name='" + name + '\'' +
+                ", helmet=" + helmet +
+                '}';
     }
 }

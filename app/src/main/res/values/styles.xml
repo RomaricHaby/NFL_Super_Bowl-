@@ -9,7 +9,7 @@
 
     <style name="AppTheme.WhiteAccent">
         <item name="colorAccent">@color/white</item>
-
-
     </style>
+
+
 </resources>
