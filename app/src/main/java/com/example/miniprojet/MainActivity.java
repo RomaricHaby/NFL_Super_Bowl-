@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import com.example.miniprojet.Model.SuperBowl;
 import com.example.miniprojet.Model.TeamHelmet;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import static java.lang.Thread.sleep;
 
@@ -40,6 +42,33 @@ public class MainActivity extends AppCompatActivity {
     private ImageView helmetButton;
     private ImageView cupButton;
 
+
+
+    private TreeMap<Integer, String> map = new TreeMap<Integer, String>();
+    public void setTreeMap(){
+        map.put(1000, "M");
+        map.put(900, "CM");
+        map.put(500, "D");
+        map.put(400, "CD");
+        map.put(100, "C");
+        map.put(90, "XC");
+        map.put(50, "L");
+        map.put(40, "XL");
+        map.put(10, "X");
+        map.put(9, "IX");
+        map.put(5, "V");
+        map.put(4, "IV");
+        map.put(1, "I");
+    }
+    public String toRoman(int number) {
+        int l =  map.floorKey(number);
+        if ( number == l ) {
+            return map.get(number);
+        }
+        return map.get(l) + toRoman(number-l);
+    }
+
+
     //todo check connexion avant affichage
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
         setButtonImg();
         setButtonCup();
-        //filter("Kansas City Chiefs");
+        setTreeMap();
     }
 
     public void setButtonCup(){
@@ -74,9 +103,19 @@ public class MainActivity extends AppCompatActivity {
                 submitButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String numSuperBowl = editText.getText().toString();
-                        System.out.println(numSuperBowl);
+
+                        Integer numSuperBowl = Integer.valueOf(editText.getText().toString());
+                        String numSuperBowlRoman = toRoman(numSuperBowl);
+
                         dialog.dismiss();
+
+                        for (int i = 0; i < superBowlArrayList.size(); i++){
+                            if(numSuperBowlRoman.equals(superBowlArrayList.get(i).getSb())){
+                                Intent intent = new Intent(MainActivity.this, DetailSuperBowlActivity.class);
+                                intent.putExtra("superBowl",superBowlArrayList.get(i));
+                                startActivity(intent);
+                            }
+                        }
                     }
                 });
                 dialog.show();

@@ -36,6 +36,7 @@
             android:layout_height="43dp"
             android:layout_marginTop="22dp"
             android:layout_marginBottom="25dp"
+            android:hint="Enter an integer "
             android:imeOptions="actionNext"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@+id/submit_button"
