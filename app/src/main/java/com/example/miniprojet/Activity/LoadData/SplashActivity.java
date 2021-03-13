@@ -1,4 +1,4 @@
-package com.example.miniprojet;
+package com.example.miniprojet.Activity.LoadData;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,7 +16,9 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.example.miniprojet.API.Async_task_data;
+import com.example.miniprojet.Activity.MainActivity;
 import com.example.miniprojet.Model.SuperBowl;
+import com.example.miniprojet.R;
 
 import java.util.ArrayList;
 
@@ -50,7 +52,7 @@ public class SplashActivity extends Activity {
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
-                Intent mainIntent = new Intent(SplashActivity.this,MainActivity.class);
+                Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
                 mainIntent.putExtra("list", superBowlArrayList);
 
                 SplashActivity.this.startActivity(mainIntent);

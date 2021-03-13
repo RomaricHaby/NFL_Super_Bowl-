@@ -1,4 +1,4 @@
-package com.example.miniprojet;
+package com.example.miniprojet.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +16,7 @@ import android.widget.ListView;
 import com.example.miniprojet.Adapter.HelmetTeamAdapter;
 import com.example.miniprojet.Adapter.SuperBowlAdapter;
 import com.example.miniprojet.Model.TeamHelmet;
+import com.example.miniprojet.R;
 
 import java.util.ArrayList;
 

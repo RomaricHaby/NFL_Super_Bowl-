@@ -32,12 +32,12 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapActivity"
+            android:name=".Activity.MapActivity"
             android:label="@string/title_activity_map"></activity>
-        <activity android:name=".DetailSuperBowlActivity" />
-        <activity android:name=".HelmetTeamActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".Activity.DetailSuperBowlActivity" />
+        <activity android:name=".Activity.HelmetTeamActivity" />
+        <activity android:name=".Activity.MainActivity" />
+        <activity android:name=".Activity.LoadData.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
