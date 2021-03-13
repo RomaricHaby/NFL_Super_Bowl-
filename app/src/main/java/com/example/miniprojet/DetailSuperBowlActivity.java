@@ -1,47 +1,87 @@
 package com.example.miniprojet;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import com.example.miniprojet.Model.SuperBowl;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.io.IOException;
 import java.util.List;
-
-import static java.lang.Thread.sleep;
 
 public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private SuperBowl superBowl;
 
+    private TextView winner;
+    private TextView qb_winner;
+    private TextView coach_winner;
+
+    private TextView loser;
+    private TextView qb_loser;
+    private TextView coach_loser;
+
+    private TextView city;
+    private TextView state;
+
+    private TextView winner_point;
+    private TextView looser_point;
+
+    private TextView sb;
+
+    public  void getWidget(){
+        winner = findViewById(R.id.winnerDetail);
+        //qb_winner = findViewById(R.id.winnerDetail);
+        //coach_winner = findViewById(R.id.winnerDetail);
+
+        loser = findViewById(R.id.loserDetail);
+        //qb_loser = findViewById(R.id.winnerDetail);
+        //coach_loser = findViewById(R.id.winnerDetail);
+
+        city = findViewById(R.id.cityDetail);
+        state = findViewById(R.id.statesDetail);
+
+        winner_point = findViewById(R.id.scoreWinnerDetail);
+        looser_point = findViewById(R.id.scoreLooserDetail);
+
+        sb = findViewById(R.id.sbDetail);
+    }
+
+    public void setDataWidget(){
+        winner.setText(superBowl.getWinner());
+
+        loser.setText(superBowl.getLoser());
+
+        city.setText("City : " + superBowl.getCity());
+        state.setText("Sate : " + superBowl.getState());
+
+        winner_point.setText(superBowl.getWinning_pts());
+        looser_point.setText(superBowl.getLosing_pts());
+
+        sb.setText("Super Bowl " + superBowl.getSb());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_super_bowl);
 
+        getWidget();
         superBowl = (SuperBowl) getIntent().getSerializableExtra("superBowl");
+        setDataWidget();
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapsDetail);
 
         mapFragment.getMapAsync(this);
-
-
-
-
     }
 
     public void showMaps(){
@@ -50,7 +90,7 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
             List<Address> addresses;
             addresses = geocoder.getFromLocationName(superBowl.getStadium(), 1);
 
-            if(addresses.size() > 0) {
+            if(!addresses.isEmpty()) {
                 double latitude = addresses.get(0).getLatitude();
                 double longitude = addresses.get(0).getLongitude();
 
@@ -58,13 +98,12 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
 
                 mMap.addMarker(new MarkerOptions()
                         .title(superBowl.getStadium())
-                        .snippet("Superbowl " + superBowl.getSb())
+                        .snippet("Superbowl " + superBowl.getSb() + "  Attendance : " + superBowl.getAttendance())
                         .position(stadium));
 
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(stadium,15),6000,null);
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(stadium,15),5000,null);
             }
         } catch (IOException e) {
-
             e.printStackTrace();
         }
     }

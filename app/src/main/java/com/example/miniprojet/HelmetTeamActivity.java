@@ -37,9 +37,9 @@ public class HelmetTeamActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
                 TeamHelmet team = (TeamHelmet) adapterView.getItemAtPosition(index);
-               returnIntent.putExtra("team", team);
-               setResult(Activity.RESULT_OK,returnIntent);
-               finish();
+                returnIntent.putExtra("team", team);
+                setResult(Activity.RESULT_OK,returnIntent);
+                finish();
             }
         });
     }

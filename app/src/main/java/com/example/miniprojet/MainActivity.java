@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -88,10 +89,24 @@ public class MainActivity extends AppCompatActivity {
         setButtonImg();
         setButtonCup();
         setTreeMap();
-        setMap();
+        setMapButton();
+        setListSuperBowlListeneer();
     }
 
-    public void setMap(){
+    private void setListSuperBowlListeneer() {
+       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
+               SuperBowl superBowl = (SuperBowl) adapterView.getItemAtPosition(index);
+               Intent intent = new Intent(MainActivity.this, DetailSuperBowlActivity.class);
+               intent.putExtra("superBowl",superBowl);
+               startActivity(intent);
+           }
+       });
+
+    }
+
+    public void setMapButton(){
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -191,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                     if(!team.getName().equals("Default team")){
+                        filter.clear();
                         filter(team.getName());
                     }
                     else{
