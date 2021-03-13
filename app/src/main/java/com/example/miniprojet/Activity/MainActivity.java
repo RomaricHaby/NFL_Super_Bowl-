@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     private void setUpList(ArrayList<SuperBowl> list)
     {
         listView = (ListView) findViewById(R.id.SuperBowlListView);
-        adapter = new SuperBowlAdapter(getApplicationContext(), 0, list);
+        adapter = new SuperBowlAdapter(getApplicationContext(), 0, list, teamHelmetArrayList);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         teamHelmetArrayList.add(new TeamHelmet("New York Jets",R.drawable.jets_new_york,"#055032"));
 
 
-        teamHelmetArrayList.add(new TeamHelmet("Baltimore Colts",R.drawable.ravens_baltimore,"#2D3075"));
+        teamHelmetArrayList.add(new TeamHelmet("Baltimore Ravens",R.drawable.ravens_baltimore,"#2D3075"));
         teamHelmetArrayList.add(new TeamHelmet("Cincinnati Bengals",R.drawable.bengals_cincinnati,"#F36A26"));
         teamHelmetArrayList.add(new TeamHelmet("Cleveland Browns",R.drawable.browns_cleveland,"#F36A24"));
         teamHelmetArrayList.add(new TeamHelmet("Pittsburgh Steelers",R.drawable.steelers_pittsburgh,"#FFC30D"));
