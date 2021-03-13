@@ -1,18 +1,18 @@
 package com.example.miniprojet;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Parcelable;
 import android.provider.Settings;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.example.miniprojet.API.Async_task_data;
@@ -30,6 +30,11 @@ public class SplashActivity extends Activity {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.activity_splash);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        Window window = getWindow();
+        window.setNavigationBarColor(Color.BLACK);
 
 
         if (haveInternetConnection() == true)
