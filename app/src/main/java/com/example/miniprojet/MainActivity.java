@@ -9,7 +9,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -18,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.miniprojet.API.Async_task_data;
 import com.example.miniprojet.Adapter.SuperBowlAdapter;
 import com.example.miniprojet.Model.SuperBowl;
 import com.example.miniprojet.Model.TeamHelmet;
@@ -46,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     private ImageView helmetButton;
     private ImageView cupButton;
     private ImageView mapButton;
-
 
 
     private TreeMap<Integer, String> map = new TreeMap<Integer, String>();
@@ -83,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         helmetButton = findViewById(R.id.helmetImageMain);
         constraintLayout = findViewById(R.id.linearLayout);
         cupButton = findViewById(R.id.cup);
-        mapButton = findViewById(R.id.map);
+        mapButton = findViewById(R.id.mapsDetail);
 
         superBowlArrayList = (ArrayList<SuperBowl>) getIntent().getSerializableExtra("list");
         setUpList(superBowlArrayList);

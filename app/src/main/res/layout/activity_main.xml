@@ -54,7 +54,7 @@
             app:srcCompat="@drawable/default_helmet" />
 
         <ImageView
-            android:id="@+id/map"
+            android:id="@+id/mapsDetail"
             android:layout_width="71dp"
             android:layout_height="61dp"
             app:layout_constraintBottom_toBottomOf="parent"
