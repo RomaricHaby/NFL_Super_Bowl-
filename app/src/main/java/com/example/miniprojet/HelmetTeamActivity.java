@@ -53,7 +53,7 @@ public class HelmetTeamActivity extends AppCompatActivity {
     }
 
     public void setArraylist(){
-        teamHelmetArrayList.add(new TeamHelmet( "Default team",R.drawable.default_helmet, "#003268"));
+        teamHelmetArrayList.add(new TeamHelmet( getString(R.string.Default_team),R.drawable.default_helmet, "#003268"));
 
         teamHelmetArrayList.add(new TeamHelmet( "Buffalo Bills",R.drawable.bills_buffalo,"#143D75"));
         teamHelmetArrayList.add(new TeamHelmet( "Miami Dolphins",R.drawable.dolphins_miami,"#006C6E"));

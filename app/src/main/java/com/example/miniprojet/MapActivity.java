@@ -2,6 +2,8 @@ package com.example.miniprojet;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -11,36 +13,58 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private ArrayList<String> stadiumList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        stadiumList = getIntent().getStringArrayListExtra("stadium");
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.mapsDetail);
+                .findFragmentById(R.id.mapsAllStadium);
         mapFragment.getMapAsync(this);
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(34, -118);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in los"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        for (int i = 0; i < stadiumList.size(); i++){
+            try {
+                Geocoder geocoder = new Geocoder(this);
+                List<Address> addresses;
+                addresses = geocoder.getFromLocationName(stadiumList.get(i), 1);
+
+                if(!addresses.isEmpty()) {
+                    double latitude = addresses.get(0).getLatitude();
+                    double longitude = addresses.get(0).getLongitude();
+
+                    LatLng stadium = new LatLng(latitude, longitude);
+
+                    mMap.addMarker(new MarkerOptions()
+                            .title(getString(R.string.Stadium))
+                            .snippet(stadiumList.get(i))
+                            .position(stadium));
+
+
+                    LatLng usa = new LatLng(37.2755783,-104.6571311);
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(usa,3),5000,null);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

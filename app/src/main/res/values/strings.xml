@@ -5,4 +5,15 @@
     <string name="helmet">helmet</string>
     <string name="super_bowl_number">super bowl number</string>
     <string name="title_activity_map">Map</string>
+    <string name="indicate_the_number_of_the_superbowl">Indicate the number of the superbowl</string>
+    <string name="enter_an_integer">Enter an integer</string>
+    <string name="validate">Validate</string>
+    <string name="choose_you_tem_for_superbowl">Choose you team for SuperBowl</string>
+    <string name="viewer">viewer</string>This superbowl does not exist!
+    <string name="superbowl_not_exist">This superbowl does not exist!</string>
+    <string name="Default_team">Default team</string>
+    <string name="Stadium">Stadium</string>
+    <string name="tiret">-</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
 </resources>

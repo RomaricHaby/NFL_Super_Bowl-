@@ -20,7 +20,7 @@
         android:id="@+id/textView"
         android:layout_width="197dp"
         android:layout_height="22dp"
-        android:text="Choose you tem for SuperBowl"
+        android:text="@string/choose_you_tem_for_superbowl"
         app:layout_constraintBottom_toTopOf="@+id/helmetListView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
