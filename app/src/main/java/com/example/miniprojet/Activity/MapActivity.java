@@ -1,7 +1,6 @@
-package com.example.miniprojet;
+package com.example.miniprojet.Activity;
 
 import androidx.fragment.app.FragmentActivity;
-
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.location.Address;
@@ -9,13 +8,13 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.Window;
 
+import com.example.miniprojet.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
