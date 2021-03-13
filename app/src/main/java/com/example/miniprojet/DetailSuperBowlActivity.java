@@ -1,8 +1,11 @@
 package com.example.miniprojet;
 
+import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -73,6 +76,11 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_super_bowl);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        Window window = getWindow();
+        window.setNavigationBarColor(Color.BLACK);
 
         getWidget();
         superBowl = (SuperBowl) getIntent().getSerializableExtra("superBowl");
