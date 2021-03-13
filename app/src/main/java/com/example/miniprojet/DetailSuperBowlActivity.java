@@ -60,8 +60,8 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
 
         loser.setText(superBowl.getLoser());
 
-        city.setText("City : " + superBowl.getCity());
-        state.setText("Sate : " + superBowl.getState());
+        city.setText(getString(R.string.city) +" : " + superBowl.getCity());
+        state.setText(getString(R.string.state) +" : "+ superBowl.getState());
 
         winner_point.setText(superBowl.getWinning_pts());
         looser_point.setText(superBowl.getLosing_pts());
@@ -98,7 +98,7 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
 
                 mMap.addMarker(new MarkerOptions()
                         .title(superBowl.getStadium())
-                        .snippet("Superbowl " + superBowl.getSb() + "  Attendance : " + superBowl.getAttendance())
+                        .snippet("Superbowl " + superBowl.getSb() + R.string.viewer + " : " + superBowl.getAttendance())
                         .position(stadium));
 
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(stadium,15),5000,null);

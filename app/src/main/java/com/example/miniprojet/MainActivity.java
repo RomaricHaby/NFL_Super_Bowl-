@@ -8,7 +8,10 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -23,6 +26,7 @@ import com.example.miniprojet.Model.SuperBowl;
 import com.example.miniprojet.Model.TeamHelmet;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
 
 import static java.lang.Thread.sleep;
@@ -81,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         helmetButton = findViewById(R.id.helmetImageMain);
         constraintLayout = findViewById(R.id.linearLayout);
         cupButton = findViewById(R.id.cup);
-        mapButton = findViewById(R.id.mapsDetail);
+        mapButton = findViewById(R.id.imgMaps);
 
         superBowlArrayList = (ArrayList<SuperBowl>) getIntent().getSerializableExtra("list");
         setUpList(superBowlArrayList);
@@ -107,10 +111,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setMapButton(){
+
+        final ArrayList<String> stadium = new ArrayList<>();
+
+        Boolean flag = false;
+
+
+        for (int i = 0; i < superBowlArrayList.size(); i++){
+            for (int j = 0; j < stadium.size(); j++){
+                if(stadium.get(j).equals(superBowlArrayList.get(i).getStadium())){
+                    flag = true;
+                }
+            }
+
+            if(!flag){
+                stadium.add(superBowlArrayList.get(i).getStadium());
+                flag = false;
+            }
+        }
+
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                intent.putExtra("stadium", stadium);
                 startActivity(intent);
             }
         });
@@ -148,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                             if(!exist){
-                                Toast.makeText(MainActivity.this, "This superbowl does not exist!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, R.string.superbowl_not_exist, Toast.LENGTH_SHORT).show();
                             }
                         }
                         dialog.dismiss();
@@ -205,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
                     //window.setNavigationBarColor(Color.parseColor(team.getColor()));
 
 
-                    if(!team.getName().equals("Default team")){
+                    if(!team.getName().equals(getString(R.string.Default_team))){
                         filter.clear();
                         filter(team.getName());
                     }

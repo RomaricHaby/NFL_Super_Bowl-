@@ -81,7 +81,7 @@
                 android:layout_width="23dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="132dp"
-                android:text="-"
+                android:text="@string/tiret"
                 app:layout_constraintEnd_toStartOf="@+id/scoreLooserDetail"
                 app:layout_constraintStart_toEndOf="@+id/scoreWinnerDetail"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -109,6 +109,7 @@
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:layout_marginTop="40dp"
+                android:contentDescription="@string/icon_nfl"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.182"
                 app:layout_constraintStart_toStartOf="parent"
