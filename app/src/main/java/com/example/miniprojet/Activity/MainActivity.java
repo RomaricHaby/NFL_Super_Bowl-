@@ -213,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
                SuperBowl superBowl = (SuperBowl) adapterView.getItemAtPosition(index);
                Intent intent = new Intent(MainActivity.this, DetailSuperBowlActivity.class);
                intent.putExtra("superBowl",superBowl);
+               intent.putExtra("helmet",teamHelmetArrayList);
                startActivity(intent);
            }
        });
@@ -277,6 +278,7 @@ public class MainActivity extends AppCompatActivity {
                                 if(numSuperBowlRoman.equals(superBowlArrayList.get(i).getSb())){
                                     Intent intent = new Intent(MainActivity.this, DetailSuperBowlActivity.class);
                                     intent.putExtra("superBowl",superBowlArrayList.get(i));
+                                    intent.putExtra("helmet",teamHelmetArrayList);
                                     startActivity(intent);
                                     exist = true;
                                 }

@@ -39,8 +39,6 @@ public class TeamHelmet implements Serializable {
         this.helmet = helmet;
     }
 
-
-
     @Override
     public String toString() {
         return "TeamHelmet{" +

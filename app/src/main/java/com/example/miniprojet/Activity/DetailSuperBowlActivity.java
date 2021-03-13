@@ -6,10 +6,12 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.miniprojet.Model.SuperBowl;
+import com.example.miniprojet.Model.TeamHelmet;
 import com.example.miniprojet.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,9 +20,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapReadyCallback {
+
+    private ArrayList<TeamHelmet> teamHelmetArrayList;
 
     private GoogleMap mMap;
     private SuperBowl superBowl;
@@ -39,6 +44,9 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
     private TextView winner_point;
     private TextView looser_point;
 
+    private ImageView winnerIMG;
+    private ImageView looserIMG;
+
     private TextView sb;
 
     public  void getWidget(){
@@ -56,6 +64,9 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
         winner_point = findViewById(R.id.scoreWinnerDetail);
         looser_point = findViewById(R.id.scoreLooserDetail);
 
+        winnerIMG = findViewById(R.id.winnerIMGDetail);
+        looserIMG = findViewById(R.id.looserIMGDetail);
+
         sb = findViewById(R.id.sbDetail);
     }
 
@@ -71,6 +82,15 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
         looser_point.setText(superBowl.getLosing_pts());
 
         sb.setText("Super Bowl " + superBowl.getSb());
+
+        for (int i = 0; i < teamHelmetArrayList.size(); i++){
+            if (teamHelmetArrayList.get(i).getName().equals(superBowl.getWinner())){
+                winnerIMG.setImageResource(teamHelmetArrayList.get(i).getHelmet());
+            }
+            else if(teamHelmetArrayList.get(i).getName().equals(superBowl.getLoser())){
+                looserIMG.setImageResource(teamHelmetArrayList.get(i).getHelmet());
+            }
+        }
     }
 
     @Override
@@ -85,6 +105,8 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
 
         getWidget();
         superBowl = (SuperBowl) getIntent().getSerializableExtra("superBowl");
+        teamHelmetArrayList = (ArrayList<TeamHelmet>) getIntent().getSerializableExtra("helmet");
+
         setDataWidget();
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -107,7 +129,7 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
 
                 mMap.addMarker(new MarkerOptions()
                         .title(superBowl.getStadium())
-                        .snippet("Superbowl " + superBowl.getSb() + getString(R.string.viewer) + " : " + superBowl.getAttendance())
+                        .snippet("Superbowl " + superBowl.getSb() + "  " + getString(R.string.viewer) + " : " + superBowl.getAttendance())
                         .position(stadium));
 
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(stadium,15),5000,null);

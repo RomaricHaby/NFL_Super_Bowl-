@@ -21,34 +21,25 @@
             android:layout_height="wrap_content">
 
 
-            <TextView
-                android:id="@+id/sbDetail"
-                android:layout_width="107dp"
-                android:layout_height="39dp"
-                android:layout_marginTop="52dp"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <fragment
                 android:id="@+id/mapsDetail"
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="391dp"
                 android:layout_height="359dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cityDetail"
                 tools:context=".Activity.MapActivity" />
 
             <TextView
-                android:id="@+id/winnerDetail"
-                android:layout_width="138dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="132dp"
+                android:id="@+id/sbDetail"
+                android:layout_width="107dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="28dp"
+                android:textAlignment="center"
                 android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,19 +47,70 @@
                 android:id="@+id/loserDetail"
                 android:layout_width="138dp"
                 android:layout_height="45dp"
-                android:layout_marginTop="132dp"
+                android:layout_marginTop="176dp"
                 android:layout_marginEnd="8dp"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="23dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="176dp"
+                android:text="@string/tiret"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="@+id/scoreLooserDetail"
+                app:layout_constraintHorizontal_bias="0.592"
+                app:layout_constraintStart_toEndOf="@+id/scoreWinnerDetail"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/winnerIMGDetail"
+                android:layout_width="64dp"
+                android:layout_height="68dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="80dp"
+                app:layout_constraintBottom_toTopOf="@+id/winnerDetail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.892"
+                app:srcCompat="@drawable/a49ers_san_francisco" />
+
+            <ImageView
+                android:id="@+id/looserIMGDetail"
+                android:layout_width="64dp"
+                android:layout_height="68dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginEnd="40dp"
+                app:layout_constraintBottom_toTopOf="@+id/loserDetail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.892"
+                app:srcCompat="@drawable/a49ers_san_francisco" />
+
+            <TextView
+                android:id="@+id/winnerDetail"
+                android:layout_width="138dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="176dp"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/scoreWinnerDetail"
                 android:layout_width="31dp"
                 android:layout_height="46dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="132dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="176dp"
+                android:textAlignment="center"
                 android:textColor="@color/white"
+                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/winnerDetail"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -76,21 +118,12 @@
                 android:id="@+id/scoreLooserDetail"
                 android:layout_width="31dp"
                 android:layout_height="45dp"
-                android:layout_marginTop="132dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginTop="176dp"
+                android:layout_marginEnd="8dp"
+                android:textAlignment="center"
                 android:textColor="@color/white"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/loserDetail"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="23dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="132dp"
-                android:text="@string/tiret"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toStartOf="@+id/scoreLooserDetail"
-                app:layout_constraintStart_toEndOf="@+id/scoreWinnerDetail"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -98,7 +131,8 @@
                 android:layout_width="143dp"
                 android:layout_height="43dp"
                 android:layout_marginStart="52dp"
-                android:layout_marginTop="33dp"
+                android:layout_marginTop="25dp"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/winnerDetail" />
@@ -107,8 +141,9 @@
                 android:id="@+id/cityDetail"
                 android:layout_width="143dp"
                 android:layout_height="45dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginEnd="52dp"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/loserDetail" />
@@ -117,10 +152,10 @@
                 android:id="@+id/imageView"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="16dp"
                 android:contentDescription="@string/icon_nfl"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.182"
+                app:layout_constraintHorizontal_bias="0.255"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/cup_super_bowl" />
