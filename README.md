@@ -1,6 +1,6 @@
 # NFL_Super_Bowl-
 
-![alt text](https://github.com/RomaricHaby/NFL_Super_Bowl-/blob/main/Splash_screen.jgp?raw=true)
+![alt text](https://github.com/RomaricHaby/NFL_Super_Bowl-/blob/main/Splash_screen.jpg?raw=true)
 
 ![alt text](https://github.com/RomaricHaby/NFL_Super_Bowl-/blob/main/main.jpg?raw=true)
 
