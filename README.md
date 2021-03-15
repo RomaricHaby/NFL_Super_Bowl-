@@ -11,7 +11,7 @@ Pendant le splash sreen, l'application va chercher un Json contenant tout les su
 <img src="https://github.com/RomaricHaby/NFL_Super_Bowl-/blob/main/main.jpg?raw=true" width="225" height="450">
 
 Ici sont regroupés tous les Super bowl :
-  - le bouton du centre permet d'afficher une liste des équipes permettant de filtrer les superbowls en fonction de l'équipe choisie
+  - le bouton du centre permet d'afficher une liste des équipes permettant de filtrer les super bowl en fonction de l'équipe choisie
   - le bouton à gauche permet d'entrer le numéro d'un super bowl et envoie vers les détails de celui-ci
   - le bouton à droite ouvre une map comportant tous les stades ayant accueilli un super bowl
 
