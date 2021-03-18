@@ -4,13 +4,20 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.text.Layout;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -18,16 +25,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
+
 import com.example.miniprojet.Adapter.SuperBowlAdapter;
 import com.example.miniprojet.Model.SuperBowl;
 import com.example.miniprojet.Model.TeamHelmet;
 import com.example.miniprojet.R;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.TreeMap;
+
+import javax.security.auth.login.LoginException;
 
 public class MainActivity extends AppCompatActivity {
     private final int requestFiltreTeam = 1;
+    private final int requestOption= 2;
     private String TAG = "MainActivity";
 
     //list view
@@ -53,6 +68,16 @@ public class MainActivity extends AppCompatActivity {
     //integer to roman
     private TreeMap<Integer, String> map = new TreeMap<Integer, String>();
 
+
+    //mode dark and light
+    private SharedPreferences sharedPref;
+    private String color;
+
+
+    private ConstraintLayout backgroundListView;
+
+
+    private  TeamHelmet currentTeam;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -70,6 +95,10 @@ public class MainActivity extends AppCompatActivity {
 
         //recover widget from layout
         setWidget();
+
+        //mode dark light
+        sharedPref = getPreferences(Context.MODE_PRIVATE);
+        color = sharedPref.getString("modeColor", "null");
 
         //set arraylist from https requete
         superBowlArrayList = (ArrayList<SuperBowl>) getIntent().getSerializableExtra("list");
@@ -89,25 +118,47 @@ public class MainActivity extends AppCompatActivity {
         setMapButton();
 
         //Detail super bowl
-        setListSuperBowlListeneer();
+        setListSuperBowlListener();
 
         //Option
         setButtonOption();
 
+        Log.e(TAG, "onCreate: "+ color );
+
+        if(color.equals("w")){
+            setLightmode();
+        }
+        else {
+            setDarkmode();
+        }
+
     }
+
+
+    //setup Dark ligth mode
+    public void setDarkmode(){
+        backgroundListView.setBackgroundColor(getResources().getColor(R.color.black));
+    }
+    public void setLightmode() {
+        backgroundListView.setBackgroundColor(getResources().getColor(R.color.white));
+    }
+
+
 
     //setup main view
     public void setWidget(){
         helmetButton = findViewById(R.id.helmetImageMain);
         constraintLayout = findViewById(R.id.linearLayout);
+        backgroundListView = findViewById(R.id.LayoutMain);
         cupButton = findViewById(R.id.cup);
         mapButton = findViewById(R.id.imgMaps);
         option = findViewById(R.id.option);
     }
+
     private void setUpList(ArrayList<SuperBowl> list)
     {
         listView = (ListView) findViewById(R.id.SuperBowlListView);
-        adapter = new SuperBowlAdapter(getApplicationContext(), 0, list, teamHelmetArrayList);
+        adapter = new SuperBowlAdapter(getApplicationContext(), 0, list, teamHelmetArrayList,color);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -200,13 +251,15 @@ public class MainActivity extends AppCompatActivity {
         option.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                Intent intent = new Intent(MainActivity.this,OptionActivity.class);
+                intent.putExtra("color",color);
+                startActivityForResult(intent,requestOption);
             }
         });
     }
 
     //to detail super bowl
-    private void setListSuperBowlListeneer() {
+    private void setListSuperBowlListener() {
        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
            public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
@@ -313,24 +366,45 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode){
             case requestFiltreTeam:
                 if(resultCode == Activity.RESULT_OK){
-                    TeamHelmet team = (TeamHelmet) data.getSerializableExtra("team");
-                    helmetButton.setImageResource(team.getHelmet());
-                    constraintLayout.setBackgroundColor(Color.parseColor(team.getColor()));
-                   /* Window window = getWindow();
-                    window.setStatusBarColor(Color.parseColor(team.getColor()));*/
+                    currentTeam = (TeamHelmet) data.getSerializableExtra("team");
+                    helmetButton.setImageResource(currentTeam.getHelmet());
+                    constraintLayout.setBackgroundColor(Color.parseColor(currentTeam.getColor()));
 
-                    //this.getApplication().setTheme(R.style.AppTheme_NFL);
+                    Window window = getWindow();
+                    window.setNavigationBarColor(Color.parseColor(currentTeam.getColor()));
 
-                    //window.setNavigationBarColor(Color.parseColor(team.getColor()));
-
-
-                    if(!team.getName().equals(getString(R.string.Default_team))){
+                    if(!currentTeam.getName().equals(getString(R.string.Default_team))){
                         filter.clear();
-                        filter(team.getName());
+                        filter(currentTeam.getName());
                     }
                     else{
+                        currentTeam = teamHelmetArrayList.get(0);
                         setUpList(superBowlArrayList);
                     }
+                }
+                break;
+
+            case requestOption:
+                if(resultCode == Activity.RESULT_OK){
+                    SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+
+                    editor.putString("modeColor", data.getStringExtra("color"));
+                    editor.apply();
+
+                    sharedPref = getPreferences(Context.MODE_PRIVATE);
+                    color = sharedPref.getString("modeColor", "null");
+
+
+                   /* if(color.equals("w")){
+                        setLightmode();
+                    }
+                    else {
+                        setDarkmode();
+                    }*/
+
+                    //todo si teamprefere chosie et swipe mode color alors on pert le filtre
+
                 }
                 break;
         }

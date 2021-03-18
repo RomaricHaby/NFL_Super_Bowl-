@@ -1,6 +1,8 @@
 package com.example.miniprojet.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +18,17 @@ import java.util.List;
 
 public class SuperBowlAdapter extends ArrayAdapter<SuperBowl> {
     private  ArrayList<TeamHelmet> teamHelmetArrayList;
+    private String color;
 
-    public SuperBowlAdapter(Context context, int resource, List<SuperBowl> superBowlsList, ArrayList<TeamHelmet> ArrayList)
+    public SuperBowlAdapter(Context context, int resource, List<SuperBowl> superBowlsList, ArrayList<TeamHelmet> ArrayList, String color)
     {
         super(context,resource, superBowlsList);
 
         teamHelmetArrayList = ArrayList;
+        this.color = color;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         SuperBowl superBowl = getItem(position);
@@ -34,6 +39,8 @@ public class SuperBowlAdapter extends ArrayAdapter<SuperBowl> {
         }
 
         TextView sb = (TextView) convertView.findViewById(R.id.sbTextView);
+        TextView vs = (TextView) convertView.findViewById(R.id.Vs);
+
 
         TextView winner = (TextView) convertView.findViewById(R.id.winnerTextView);
         ImageView winnerHelmet = (ImageView) convertView.findViewById(R.id.helmetWinner);
@@ -45,6 +52,7 @@ public class SuperBowlAdapter extends ArrayAdapter<SuperBowl> {
         winner.setText(superBowl.getWinner());
         loser.setText(superBowl.getLoser());
 
+
         for (int i = 0; i < teamHelmetArrayList.size(); i++){
             if (teamHelmetArrayList.get(i).getName().equals(superBowl.getWinner())){
                 winnerHelmet.setImageResource(teamHelmetArrayList.get(i).getHelmet());
@@ -52,6 +60,20 @@ public class SuperBowlAdapter extends ArrayAdapter<SuperBowl> {
             else if(teamHelmetArrayList.get(i).getName().equals(superBowl.getLoser())){
                 looserHelmet.setImageResource(teamHelmetArrayList.get(i).getHelmet());
             }
+        }
+
+
+        if(!color.equals("w")){
+            sb.setTextColor(Color.WHITE);
+            winner.setTextColor(Color.WHITE);
+            loser.setTextColor(Color.WHITE);
+            vs.setTextColor(Color.WHITE);
+        }
+        else{
+            sb.setTextColor(Color.BLACK);
+            winner.setTextColor(Color.BLACK);
+            loser.setTextColor(Color.BLACK);
+            vs.setTextColor(Color.BLACK);
         }
 
         return convertView;
