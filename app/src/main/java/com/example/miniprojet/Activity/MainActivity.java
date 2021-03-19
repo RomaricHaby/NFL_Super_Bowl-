@@ -243,6 +243,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, HelmetTeamActivity.class);
                 intent.putExtra("helmet",teamHelmetArrayList);
+                intent.putExtra("color",color);
                 startActivityForResult(intent,requestFiltreTeam);
             }
         });

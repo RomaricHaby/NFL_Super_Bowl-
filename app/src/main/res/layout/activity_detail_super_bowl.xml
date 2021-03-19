@@ -56,7 +56,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/vsDetail"
                 android:layout_width="23dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="176dp"

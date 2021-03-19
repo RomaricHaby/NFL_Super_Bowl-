@@ -51,11 +51,14 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
     private ImageView winnerIMG;
     private ImageView looserIMG;
 
+    private TextView vsDetail;
+
     private TextView sb;
 
     private String color;
 
     public  void getWidget(){
+        vsDetail = findViewById(R.id.vsDetail);
         layoutDetailSB = findViewById(R.id.layoutDetailSB);
 
         winner = findViewById(R.id.winnerDetail);
@@ -99,6 +102,14 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
                 looserIMG.setImageResource(teamHelmetArrayList.get(i).getHelmet());
             }
         }
+
+
+        if(color.equals("w")){
+            setLightMode();
+        }
+        else {
+            setDarkMode();
+        }
     }
 
     @Override
@@ -126,7 +137,7 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
     }
 
     public void setDarkMode(){
-        layoutDetailSB.setBackgroundColor(Color.WHITE);
+        layoutDetailSB.setBackgroundColor(Color.BLACK);
 
         winner.setTextColor(Color.WHITE);
         winner_point.setTextColor(Color.WHITE);
@@ -138,10 +149,23 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
         state.setTextColor(Color.WHITE);
 
         sb.setTextColor(Color.WHITE);
+        vsDetail.setTextColor(Color.WHITE);
 
     }
     public void setLightMode(){
+        layoutDetailSB.setBackgroundColor(Color.WHITE);
 
+        winner.setTextColor(Color.BLACK);
+        winner_point.setTextColor(Color.BLACK);
+
+        looser.setTextColor(Color.BLACK);
+        looser_point.setTextColor(Color.BLACK);
+
+        city.setTextColor(Color.BLACK);
+        state.setTextColor(Color.BLACK);
+
+        sb.setTextColor(Color.BLACK);
+        vsDetail.setTextColor(Color.BLACK);
     }
 
     public void showMaps(){
