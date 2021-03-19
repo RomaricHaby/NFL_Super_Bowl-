@@ -7,9 +7,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -59,6 +61,11 @@ public class OptionActivity extends AppCompatActivity {
     }
 
     public void setDarkmode(){
+
+        Window window = getWindow();
+        window.setNavigationBarColor(getResources().getColor(R.color.black));
+
+
         layout.setBackgroundColor(getResources().getColor(R.color.black));
         button.setTextColor(getResources().getColor(R.color.black));
         button.setChecked(false);
@@ -66,6 +73,10 @@ public class OptionActivity extends AppCompatActivity {
         gearOption.setImageResource(R.drawable.gear_option);
     }
     public void setLightmode(){
+        Window window = getWindow();
+        window.setNavigationBarColor(getResources().getColor(R.color.white));
+
+
         layout.setBackgroundColor(getResources().getColor(R.color.white));
         button.setTextColor(getResources().getColor(R.color.white));
         button.setChecked(true);

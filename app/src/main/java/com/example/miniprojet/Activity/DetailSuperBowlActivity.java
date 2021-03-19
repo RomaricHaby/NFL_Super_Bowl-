@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.example.miniprojet.Model.SuperBowl;
 import com.example.miniprojet.Model.TeamHelmet;
 import com.example.miniprojet.R;
@@ -27,6 +29,8 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
 
     private ArrayList<TeamHelmet> teamHelmetArrayList;
 
+    private ConstraintLayout layoutDetailSB;
+
     private GoogleMap mMap;
     private SuperBowl superBowl;
 
@@ -34,9 +38,9 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
     private TextView qb_winner;
     private TextView coach_winner;
 
-    private TextView loser;
-    private TextView qb_loser;
-    private TextView coach_loser;
+    private TextView looser;
+    private TextView qb_looser;
+    private TextView coach_looser;
 
     private TextView city;
     private TextView state;
@@ -49,12 +53,16 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
 
     private TextView sb;
 
+    private String color;
+
     public  void getWidget(){
+        layoutDetailSB = findViewById(R.id.layoutDetailSB);
+
         winner = findViewById(R.id.winnerDetail);
         //qb_winner = findViewById(R.id.winnerDetail);
         //coach_winner = findViewById(R.id.winnerDetail);
 
-        loser = findViewById(R.id.loserDetail);
+        looser = findViewById(R.id.loserDetail);
         //qb_loser = findViewById(R.id.winnerDetail);
         //coach_loser = findViewById(R.id.winnerDetail);
 
@@ -73,7 +81,7 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
     public void setDataWidget(){
         winner.setText(superBowl.getWinner());
 
-        loser.setText(superBowl.getLoser());
+        looser.setText(superBowl.getLoser());
 
         city.setText(getString(R.string.city) +" : " + superBowl.getCity());
         state.setText(getString(R.string.state) +" : "+ superBowl.getState());
@@ -105,6 +113,8 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
 
         getWidget();
         superBowl = (SuperBowl) getIntent().getSerializableExtra("superBowl");
+        color = getIntent().getStringExtra("color");
+
         teamHelmetArrayList = (ArrayList<TeamHelmet>) getIntent().getSerializableExtra("helmet");
 
         setDataWidget();
@@ -113,6 +123,25 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
                 .findFragmentById(R.id.mapsDetail);
 
         mapFragment.getMapAsync(this);
+    }
+
+    public void setDarkMode(){
+        layoutDetailSB.setBackgroundColor(Color.WHITE);
+
+        winner.setTextColor(Color.WHITE);
+        winner_point.setTextColor(Color.WHITE);
+
+        looser.setTextColor(Color.WHITE);
+        looser_point.setTextColor(Color.WHITE);
+
+        city.setTextColor(Color.WHITE);
+        state.setTextColor(Color.WHITE);
+
+        sb.setTextColor(Color.WHITE);
+
+    }
+    public void setLightMode(){
+
     }
 
     public void showMaps(){
