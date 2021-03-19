@@ -19,13 +19,15 @@ import java.util.List;
 public class SuperBowlAdapter extends ArrayAdapter<SuperBowl> {
     private  ArrayList<TeamHelmet> teamHelmetArrayList;
     private String color;
+    private String colorTeam;
 
-    public SuperBowlAdapter(Context context, int resource, List<SuperBowl> superBowlsList, ArrayList<TeamHelmet> ArrayList, String color)
+    public SuperBowlAdapter(Context context, int resource, List<SuperBowl> superBowlsList, ArrayList<TeamHelmet> ArrayList, String color,String colorTeam)
     {
         super(context,resource, superBowlsList);
 
         teamHelmetArrayList = ArrayList;
         this.color = color;
+        this.colorTeam = colorTeam;
     }
 
     @SuppressLint("ResourceAsColor")
@@ -47,6 +49,9 @@ public class SuperBowlAdapter extends ArrayAdapter<SuperBowl> {
 
         TextView loser = (TextView) convertView.findViewById(R.id.loserTextView);
         ImageView looserHelmet = (ImageView) convertView.findViewById(R.id.helmetLooser);
+
+        TextView splitBarre = (TextView) convertView.findViewById(R.id.splitBarre);
+        splitBarre.setBackgroundColor(Color.parseColor(colorTeam));
 
         sb.setText("Super bowl " + superBowl.getSb());
         winner.setText(superBowl.getWinner());

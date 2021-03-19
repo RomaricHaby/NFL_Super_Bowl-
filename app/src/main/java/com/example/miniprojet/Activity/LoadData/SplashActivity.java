@@ -26,7 +26,7 @@ public class SplashActivity extends Activity {
     public static ArrayList<SuperBowl> superBowlArrayList = new ArrayList<>();
 
     /** Duration of wait **/
-    private final int SPLASH_DISPLAY_LENGTH = 3500;
+    private final int SPLASH_DISPLAY_LENGTH = 4000;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -37,6 +37,7 @@ public class SplashActivity extends Activity {
 
         Window window = getWindow();
         window.setNavigationBarColor(Color.BLACK);
+        window.setStatusBarColor(Color.BLACK);
 
 
         if (haveInternetConnection() == true)
@@ -98,6 +99,8 @@ public class SplashActivity extends Activity {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
+
 
 
 }

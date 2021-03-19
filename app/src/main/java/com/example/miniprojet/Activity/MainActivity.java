@@ -96,17 +96,19 @@ public class MainActivity extends AppCompatActivity {
         //recover widget from layout
         setWidget();
 
+
         //mode dark light
         sharedPref = getPreferences(Context.MODE_PRIVATE);
         color = sharedPref.getString("modeColor", "null");
 
-        //set arraylist from https requete
-        superBowlArrayList = (ArrayList<SuperBowl>) getIntent().getSerializableExtra("list");
-        setUpList(superBowlArrayList);
-
         //set up for helmet
         setArraylist();
         setButtonImg();
+
+        //set arraylist from https requete
+        superBowlArrayList = (ArrayList<SuperBowl>) getIntent().getSerializableExtra("list");
+        currentTeam = teamHelmetArrayList.get(0);
+        setUpList(superBowlArrayList);
 
         //filter superbowl
         setButtonCup();
@@ -158,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
     private void setUpList(ArrayList<SuperBowl> list)
     {
         listView = (ListView) findViewById(R.id.SuperBowlListView);
-        adapter = new SuperBowlAdapter(getApplicationContext(), 0, list, teamHelmetArrayList,color);
+        adapter = new SuperBowlAdapter(getApplicationContext(), 0, list, teamHelmetArrayList,color,currentTeam.getColor());
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -372,12 +374,17 @@ public class MainActivity extends AppCompatActivity {
 
                     Window window = getWindow();
                     window.setNavigationBarColor(Color.parseColor(currentTeam.getColor()));
+                    window.setStatusBarColor(Color.parseColor(currentTeam.getColor()));
+
+                    Toolbar toolbar = findViewById(R.id.toolbar);
+                    toolbar.setBackgroundColor(Color.parseColor(currentTeam.getColor()));
 
                     if(!currentTeam.getName().equals(getString(R.string.Default_team))){
                         filter.clear();
                         filter(currentTeam.getName());
                     }
                     else{
+                        filter.clear();
                         currentTeam = teamHelmetArrayList.get(0);
                         setUpList(superBowlArrayList);
                     }
@@ -396,17 +403,26 @@ public class MainActivity extends AppCompatActivity {
                     color = sharedPref.getString("modeColor", "null");
 
 
-                   /* if(color.equals("w")){
+                    if(color.equals("w")){
                         setLightmode();
                     }
                     else {
                         setDarkmode();
-                    }*/
+                    }
 
-                    //todo si teamprefere chosie et swipe mode color alors on pert le filtre
-
+                    if(filter.isEmpty()){
+                        filter.clear();
+                        currentTeam = teamHelmetArrayList.get(0);
+                        setUpList(superBowlArrayList);
+                    }
+                    else{
+                        filter.clear();
+                        filter(currentTeam.getName());
+                    }
                 }
                 break;
         }
     }
+
+
 }
