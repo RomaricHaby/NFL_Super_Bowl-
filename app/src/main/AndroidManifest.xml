@@ -17,7 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_nfl_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.OptionActivity"></activity>
+        <activity android:name=".Activity.Chart.ChartActivityCourbe"></activity>
+        <activity android:name=".Activity.Chart.ChartActivityBatton"></activity>
+        <activity android:name=".Activity.OptionActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -13,10 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -25,20 +21,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
+import com.example.miniprojet.Activity.Chart.ChartActivityCourbe;
 import com.example.miniprojet.Adapter.SuperBowlAdapter;
 import com.example.miniprojet.Model.SuperBowl;
 import com.example.miniprojet.Model.TeamHelmet;
 import com.example.miniprojet.R;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.TreeMap;
-
-import javax.security.auth.login.LoginException;
 
 import static java.lang.Thread.sleep;
 
@@ -60,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     //Button menu
     private ConstraintLayout constraintLayout; // change color by team
     private Button option;
+    private Button chart;
     private ImageView helmetButton;
     private ImageView cupButton;
     private ImageView mapButton;
@@ -135,9 +127,12 @@ public class MainActivity extends AppCompatActivity {
 
         //Option
         setButtonOption();
+        setButtonChart();
 
         // light dark mode
         checKModeColor();
+
+        Log.e(TAG, superBowlArrayList.get(0).getSb() );
     }
 
     public void checKModeColor(){
@@ -175,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
     //setup main view
     public void setWidget(){
+        chart = findViewById(R.id.chartButton);
         helmetButton = findViewById(R.id.helmetImageMain);
         constraintLayout = findViewById(R.id.linearLayout);
         backgroundListView = findViewById(R.id.LayoutMain);
@@ -285,6 +281,16 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("helmet",teamHelmetArrayList);
                 intent.putExtra("favoriteTeam",favoriteTeam);
                 startActivityForResult(intent,requestOption);
+            }
+        });
+    }
+    public void setButtonChart(){
+        chart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ChartActivityCourbe.class);
+                intent.putExtra("superBowl",superBowlArrayList);
+                startActivity(intent);
             }
         });
     }
