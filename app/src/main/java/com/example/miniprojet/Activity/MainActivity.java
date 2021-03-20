@@ -42,6 +42,11 @@ import javax.security.auth.login.LoginException;
 
 import static java.lang.Thread.sleep;
 
+<<<<<<< HEAD
+=======
+//tODO MANQUE CASQUE POUR LES Los Angeles Raiders et Baltimore Colts
+
+>>>>>>> main
 public class MainActivity extends AppCompatActivity {
     private final int requestFiltreTeam = 1;
     private final int requestOption= 2;
