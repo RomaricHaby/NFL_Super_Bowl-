@@ -448,6 +448,7 @@ public class MainActivity extends AppCompatActivity {
                     findTeamHelmetByName(sharedPref.getString("teamFavorite", "null"));
 
 
+<<<<<<< HEAD
                     checKModeColor();
 
                     filter.clear();
@@ -455,6 +456,24 @@ public class MainActivity extends AppCompatActivity {
                     setUpList(superBowlArrayList,currentTeam.getColor());
 
                     setUIColor(currentTeam);
+=======
+                    if(color.equals("w")){
+                        setLightmode();
+                    }
+                    else {
+                        setDarkmode();
+                    }
+
+                    if(filter.isEmpty()){
+                        filter.clear();
+                        currentTeam = teamHelmetArrayList.get(0);
+                        setUpList(superBowlArrayList,currentTeam.getColor());
+                    }
+                    else{
+                        filter.clear();
+                        filter(currentTeam.getName(),currentTeam.getColor());
+                    }
+>>>>>>> main
                 }
                 break;
         }
