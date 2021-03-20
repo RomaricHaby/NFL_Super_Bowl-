@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">NFL Super Bowl</string>
-    <string name="developed_by_romaric_haby">Développé par Romaric Haby</string>
+    <string name="developed_by_romaric_haby">Développée par Romaric Haby</string>
     <string name="helmet">Casque</string>
     <string name="super_bowl_number">Numéro du Super Bowl</string>
     <string name="title_activity_map">Carte</string>
@@ -10,7 +10,7 @@
     <string name="enter_an_integer">Entrez un nombre entier</string>
     <string name="validate">Valider</string>
     <string name="choose_you_tem_for_superbowl">Choisissez votre équipe pour le SuperBowl</string>
-    <string name="viewer">Spectateur</string>
+    <string name="viewer">Spectateurs</string>
     <string name="superbowl_not_exist">Ce superbowl n\'existe pas !</string>
     <string name="Default_team">Équipe par défaut</string>
     <string name="Stadium">Stade</string>

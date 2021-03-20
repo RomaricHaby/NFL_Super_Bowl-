@@ -3,6 +3,7 @@ package com.example.miniprojet.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,8 +60,29 @@ public class SuperBowlAdapter extends ArrayAdapter<SuperBowl> {
 
 
         for (int i = 0; i < teamHelmetArrayList.size(); i++){
-            if (teamHelmetArrayList.get(i).getName().equals(superBowl.getWinner())){
+            //Colts, Raiders, RAM have changed names over the years so I manage the specific cases to display the correct helmet
+            if(superBowl.getWinner().equals("Baltimore Colts")){
+                winnerHelmet.setImageResource(teamHelmetArrayList.get(10).getHelmet());
+            }
+            else if(superBowl.getWinner().equals("Los Angeles Raiders")){
+                winnerHelmet.setImageResource(teamHelmetArrayList.get(16).getHelmet());
+            }
+            else if(superBowl.getWinner().equals("St. Louis Rams")){
+                winnerHelmet.setImageResource(teamHelmetArrayList.get(30).getHelmet());
+            }
+            else if (teamHelmetArrayList.get(i).getName().equals(superBowl.getWinner())){
                 winnerHelmet.setImageResource(teamHelmetArrayList.get(i).getHelmet());
+            }
+
+
+            if(superBowl.getLoser().equals("Baltimore Colts")){
+                looserHelmet.setImageResource(teamHelmetArrayList.get(10).getHelmet());
+            }
+            else if(superBowl.getLoser().equals("Los Angeles Raiders")){
+                looserHelmet.setImageResource(teamHelmetArrayList.get(16).getHelmet());
+            }
+            else if(superBowl.getLoser().equals("St. Louis Rams")){
+                looserHelmet.setImageResource(teamHelmetArrayList.get(30).getHelmet());
             }
             else if(teamHelmetArrayList.get(i).getName().equals(superBowl.getLoser())){
                 looserHelmet.setImageResource(teamHelmetArrayList.get(i).getHelmet());

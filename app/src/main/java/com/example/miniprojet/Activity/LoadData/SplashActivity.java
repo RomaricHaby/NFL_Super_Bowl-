@@ -14,7 +14,6 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.view.Window;
 import android.widget.Toast;
-
 import com.example.miniprojet.API.Async_task_data;
 import com.example.miniprojet.Activity.MainActivity;
 import com.example.miniprojet.Model.SuperBowl;
@@ -26,7 +25,7 @@ public class SplashActivity extends Activity {
     public static ArrayList<SuperBowl> superBowlArrayList = new ArrayList<>();
 
     /** Duration of wait **/
-    private final int SPLASH_DISPLAY_LENGTH = 4000;
+    private final int SPLASH_DISPLAY_LENGTH = 4500;
 
     @Override
     public void onCreate(Bundle icicle) {
