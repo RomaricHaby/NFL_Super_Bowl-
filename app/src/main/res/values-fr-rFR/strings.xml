@@ -2,19 +2,22 @@
 <resources>
     <string name="app_name">NFL Super Bowl</string>
     <string name="developed_by_romaric_haby">Développé par Romaric Haby</string>
-    <string name="helmet">casque</string>
-    <string name="super_bowl_number">numéro du Super Bowl</string>
+    <string name="helmet">Casque</string>
+    <string name="super_bowl_number">Numéro du Super Bowl</string>
     <string name="title_activity_map">Carte</string>
     <string name="icon_nfl">icon NFl</string>
     <string name="indicate_the_number_of_the_superbowl">Indiquez le numéro du superbowl</string>
     <string name="enter_an_integer">Entrez un nombre entier</string>
     <string name="validate">Valider</string>
     <string name="choose_you_tem_for_superbowl">Choisissez votre équipe pour le SuperBowl</string>
-    <string name="viewer">spectateur</string>
+    <string name="viewer">Spectateur</string>
     <string name="superbowl_not_exist">Ce superbowl n\'existe pas !</string>
     <string name="Default_team">Équipe par défaut</string>
     <string name="Stadium">Stade</string>
     <string name="tiret">-</string>
     <string name="city">Ville</string>
     <string name="state">Etat</string>
+    <string name="favoriteTeam">Choisissez votre équipe favorite</string>
+    <string name="save_option">Sauvegarder option</string>
+    <string name="Parameter">Paramètres</string>
 </resources>

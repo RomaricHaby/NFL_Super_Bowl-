@@ -11,9 +11,9 @@
         android:id="@+id/gearOption"
         android:layout_width="39dp"
         android:layout_height="40dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/gear_option" />
@@ -24,9 +24,9 @@
         android:layout_height="25dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="44dp"
-        android:text="Paramètre "
+        android:text="@string/Parameter"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.26"
         app:layout_constraintStart_toEndOf="@+id/gearOption"
@@ -36,11 +36,47 @@
         android:id="@+id/toggleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="76dp"
         android:background="@drawable/btn_toggle"
         android:textOff="Ligth"
         android:textOn="Dark"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textOption" />
+
+    <TextView
+        android:id="@+id/teamFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="@string/favoriteTeam"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
+
+    <ImageView
+        android:id="@+id/helmet"
+        android:layout_width="106dp"
+        android:layout_height="103dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/teamFavorite"
+        app:srcCompat="@drawable/default_helmet" />
+
+    <Button
+        android:id="@+id/buttonSaveOption"
+        android:layout_width="137dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="68dp"
+        android:text="@string/save_option"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/helmet" />
 </androidx.constraintlayout.widget.ConstraintLayout>

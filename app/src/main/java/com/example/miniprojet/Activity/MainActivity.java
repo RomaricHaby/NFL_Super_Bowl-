@@ -40,6 +40,10 @@ import java.util.TreeMap;
 
 import javax.security.auth.login.LoginException;
 
+import static java.lang.Thread.sleep;
+
+
+//TOdo rajouter scroll view sur option
 public class MainActivity extends AppCompatActivity {
     private final int requestFiltreTeam = 1;
     private final int requestOption= 2;
@@ -69,9 +73,10 @@ public class MainActivity extends AppCompatActivity {
     private TreeMap<Integer, String> map = new TreeMap<Integer, String>();
 
 
-    //mode dark and light
+    //mode dark and light / preferences
     private SharedPreferences sharedPref;
     private String color;
+    private TeamHelmet favoriteTeam;
 
 
     private ConstraintLayout backgroundListView;
@@ -88,11 +93,6 @@ public class MainActivity extends AppCompatActivity {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        Window window = getWindow();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setNavigationBarColor(Color.BLACK);
-        }
-
         //recover widget from layout
         setWidget();
 
@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         sharedPref = getPreferences(Context.MODE_PRIVATE);
         color = sharedPref.getString("modeColor", "null");
 
+
         //set up for helmet
         setArraylist();
         setButtonImg();
@@ -108,7 +109,33 @@ public class MainActivity extends AppCompatActivity {
         //set arraylist from https requete
         superBowlArrayList = (ArrayList<SuperBowl>) getIntent().getSerializableExtra("list");
         currentTeam = teamHelmetArrayList.get(0);
-        setUpList(superBowlArrayList);
+
+
+        findTeamHelmetByName(sharedPref.getString("teamFavorite", "null")); //favorite team
+
+        //todo faire une fonction et regarde dasn le on result pour changer la couleurs
+        if(favoriteTeam.getName().contains("défaut")){
+            setUpList(superBowlArrayList,favoriteTeam.getColor());
+
+            Window window = getWindow();
+            window.setNavigationBarColor(Color.parseColor(favoriteTeam.getColor()));
+        }
+        else{
+            helmetButton.setImageResource(favoriteTeam.getHelmet());
+            filter(favoriteTeam.getName(),favoriteTeam.getColor());
+            constraintLayout.setBackgroundColor(Color.parseColor(favoriteTeam.getColor()));
+
+            Window window = getWindow();
+            window.setNavigationBarColor(Color.parseColor(favoriteTeam.getColor()));
+            window.setStatusBarColor(Color.parseColor(favoriteTeam.getColor()));
+
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            toolbar.setBackgroundColor(Color.parseColor(favoriteTeam.getColor()));
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.setNavigationBarColor(Color.parseColor(favoriteTeam.getColor()));
+            }
+        }
 
         //filter superbowl
         setButtonCup();
@@ -125,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
         //Option
         setButtonOption();
 
-        Log.e(TAG, "onCreate: "+ color );
 
         if(color.equals("w")){
             setLightmode();
@@ -133,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
         else {
             setDarkmode();
         }
+
 
     }
 
@@ -157,10 +184,10 @@ public class MainActivity extends AppCompatActivity {
         option = findViewById(R.id.option);
     }
 
-    private void setUpList(ArrayList<SuperBowl> list)
+    private void setUpList(ArrayList<SuperBowl> list,String colorTeam)
     {
         listView = (ListView) findViewById(R.id.SuperBowlListView);
-        adapter = new SuperBowlAdapter(getApplicationContext(), 0, list, teamHelmetArrayList,color,currentTeam.getColor());
+        adapter = new SuperBowlAdapter(getApplicationContext(), 0, list, teamHelmetArrayList,color,colorTeam);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -256,6 +283,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,OptionActivity.class);
                 intent.putExtra("color",color);
+                intent.putExtra("helmet",teamHelmetArrayList);
                 startActivityForResult(intent,requestOption);
             }
         });
@@ -336,6 +364,7 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent = new Intent(MainActivity.this, DetailSuperBowlActivity.class);
                                     intent.putExtra("superBowl",superBowlArrayList.get(i));
                                     intent.putExtra("helmet",teamHelmetArrayList);
+                                    intent.putExtra("color",color);
                                     startActivity(intent);
                                     exist = true;
                                 }
@@ -352,16 +381,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void filter(String nameTeam){
+    public void filter(String nameTeam, String colorTeam){
         filter.clear();
         for(int i = 0; i < superBowlArrayList.size(); i++){
             if(superBowlArrayList.get(i).getWinner().equals(nameTeam) || superBowlArrayList.get(i).getLoser().equals(nameTeam) ){
                 filter.add(superBowlArrayList.get(i));
             }
         }
-        setUpList(filter);
+        setUpList(filter,colorTeam);
     }
 
+    //preferences
+    public void findTeamHelmetByName(String nameTeam){
+
+        Log.e(TAG, nameTeam);
+        if (nameTeam == "null" || nameTeam.contains("défaut")){
+            favoriteTeam = teamHelmetArrayList.get(0);
+        }
+        else{
+            for (int i = 0; i < teamHelmetArrayList.size(); i++){
+                if(teamHelmetArrayList.get(i).getName().equals(nameTeam)){
+                    favoriteTeam = teamHelmetArrayList.get(i);
+                }
+            }
+        }
+    }
     
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -383,12 +427,12 @@ public class MainActivity extends AppCompatActivity {
 
                     if(!currentTeam.getName().equals(getString(R.string.Default_team))){
                         filter.clear();
-                        filter(currentTeam.getName());
+                        filter(currentTeam.getName(), currentTeam.getColor());
                     }
                     else{
                         filter.clear();
                         currentTeam = teamHelmetArrayList.get(0);
-                        setUpList(superBowlArrayList);
+                        setUpList(superBowlArrayList, currentTeam.getColor());
                     }
                 }
                 break;
@@ -398,11 +442,16 @@ public class MainActivity extends AppCompatActivity {
                     SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
 
+                    TeamHelmet teamHelmet = (TeamHelmet) data.getSerializableExtra("team");
+
                     editor.putString("modeColor", data.getStringExtra("color"));
+                    editor.putString("teamFavorite", teamHelmet.getName());
                     editor.apply();
+
 
                     sharedPref = getPreferences(Context.MODE_PRIVATE);
                     color = sharedPref.getString("modeColor", "null");
+                    findTeamHelmetByName(sharedPref.getString("teamFavorite", "null"));
 
 
                     if(color.equals("w")){
@@ -410,16 +459,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else {
                         setDarkmode();
-                    }
-
-                    if(filter.isEmpty()){
-                        filter.clear();
-                        currentTeam = teamHelmetArrayList.get(0);
-                        setUpList(superBowlArrayList);
-                    }
-                    else{
-                        filter.clear();
-                        filter(currentTeam.getName());
                     }
                 }
                 break;

@@ -16,4 +16,7 @@
     <string name="tiret">-</string>
     <string name="city">City</string>
     <string name="state">State</string>
+    <string name="favoriteTeam">Choose your favorite team</string>
+    <string name="save_option">Save option</string>
+    <string name="Parameter">Parameters</string>
 </resources>
