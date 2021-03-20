@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -27,7 +26,7 @@ public class OptionActivity extends AppCompatActivity {
     private ToggleButton button;
     private ConstraintLayout layout;
     private TextView textView;
-    private TextView favoriteTeam;
+    private TextView favoriteTeamTextView;
     private ImageView gearOption;
     private SharedPreferences preferences;
 
@@ -37,6 +36,7 @@ public class OptionActivity extends AppCompatActivity {
     private ArrayList<TeamHelmet> teamHelmetArrayList;
 
     private Button save;
+
 
     //data to return
     private Intent returnIntent = new Intent();
@@ -51,10 +51,14 @@ public class OptionActivity extends AppCompatActivity {
 
         teamHelmetArrayList = (ArrayList<TeamHelmet>) getIntent().getSerializableExtra("helmet");
 
-        teamHelmetFavorite = teamHelmetArrayList.get(0); // default team
+        //teamHelmetFavorite = teamHelmetArrayList.get(0); // default team
         save.setBackgroundColor(Color.parseColor(teamHelmetArrayList.get(0).getColor()));
 
         color = getIntent().getStringExtra("color");
+
+        teamHelmetFavorite = (TeamHelmet) getIntent().getSerializableExtra("favoriteTeam");
+        favoriteTeamButton.setImageResource(teamHelmetFavorite.getHelmet());
+
 
         if(color.equals("w")){
             setLightmode();
@@ -120,7 +124,7 @@ public class OptionActivity extends AppCompatActivity {
         button.setTextColor(getResources().getColor(R.color.black));
         button.setChecked(false);
         textView.setTextColor(getResources().getColor(R.color.white));
-        favoriteTeam.setTextColor(getResources().getColor(R.color.white));
+        favoriteTeamTextView.setTextColor(getResources().getColor(R.color.white));
         gearOption.setImageResource(R.drawable.gear_option);
     }
     public void setLightmode(){
@@ -132,14 +136,14 @@ public class OptionActivity extends AppCompatActivity {
         button.setTextColor(getResources().getColor(R.color.white));
         button.setChecked(true);
         textView.setTextColor(getResources().getColor(R.color.black));
-        favoriteTeam.setTextColor(getResources().getColor(R.color.black));
+        favoriteTeamTextView.setTextColor(getResources().getColor(R.color.black));
         gearOption.setImageResource(R.drawable.gear_option_black);
     }
 
 
     public void getWidget(){
         save = findViewById(R.id.buttonSaveOption);
-        favoriteTeam = findViewById(R.id.teamFavorite);
+        favoriteTeamTextView = findViewById(R.id.teamFavorite);
         favoriteTeamButton = findViewById(R.id.helmet);
         button = findViewById(R.id.toggleButton);
         layout = findViewById(R.id.layoutOption);
