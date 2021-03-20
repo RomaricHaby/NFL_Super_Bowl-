@@ -43,7 +43,7 @@ import javax.security.auth.login.LoginException;
 import static java.lang.Thread.sleep;
 
 //tODO MANQUE CASQUE POUR LES Los Angeles Raiders et Baltimore Colts
-//TOdo rajouter scroll view sur option
+
 public class MainActivity extends AppCompatActivity {
     private final int requestFiltreTeam = 1;
     private final int requestOption= 2;
@@ -384,7 +384,27 @@ public class MainActivity extends AppCompatActivity {
     }
     public void filter(String nameTeam, String colorTeam){
         filter.clear();
+
+        //Colts, Raiders, RAM have changed names over the years so I manage the specific cases to display the correct helmet
         for(int i = 0; i < superBowlArrayList.size(); i++){
+            if(nameTeam.equals("Indianapolis Colts")) {
+                if (superBowlArrayList.get(i).getWinner().equals("Baltimore Colts") || superBowlArrayList.get(i).getLoser().equals("Baltimore Colts")) {
+                    filter.add(superBowlArrayList.get(i));
+                }
+            }
+
+            if(nameTeam.equals("Oakland Raiders")) {
+                if (superBowlArrayList.get(i).getWinner().equals("Los Angeles Raiders") || superBowlArrayList.get(i).getLoser().equals("Los Angeles Raiders")) {
+                    filter.add(superBowlArrayList.get(i));
+                }
+            }
+
+            if(nameTeam.equals("Los Angeles Rams")) {
+                if (superBowlArrayList.get(i).getWinner().equals("St. Louis Rams") || superBowlArrayList.get(i).getLoser().equals("St. Louis Rams")) {
+                    filter.add(superBowlArrayList.get(i));
+                }
+            }
+
             if(superBowlArrayList.get(i).getWinner().equals(nameTeam) || superBowlArrayList.get(i).getLoser().equals(nameTeam) ){
                 filter.add(superBowlArrayList.get(i));
             }
@@ -394,8 +414,6 @@ public class MainActivity extends AppCompatActivity {
 
     //preferences
     public void findTeamHelmetByName(String nameTeam){
-
-        Log.e(TAG, nameTeam);
         if (nameTeam == "null" || nameTeam.contains("défaut")){
             favoriteTeam = teamHelmetArrayList.get(0);
         }

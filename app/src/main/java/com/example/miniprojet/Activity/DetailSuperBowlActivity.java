@@ -94,9 +94,32 @@ public class DetailSuperBowlActivity extends AppCompatActivity implements OnMapR
 
         sb.setText("Super Bowl " + superBowl.getSb());
 
+
         for (int i = 0; i < teamHelmetArrayList.size(); i++){
-            if (teamHelmetArrayList.get(i).getName().equals(superBowl.getWinner())){
+            //Colts, Raiders, RAM have changed names over the years so I manage the specific cases to display the correct helmet
+
+            if(superBowl.getWinner().equals("Baltimore Colts")){
+                winnerIMG.setImageResource(teamHelmetArrayList.get(10).getHelmet());
+            }
+            else if(superBowl.getWinner().equals("Los Angeles Raiders")){
+                winnerIMG.setImageResource(teamHelmetArrayList.get(16).getHelmet());
+            }
+            else if(superBowl.getWinner().equals("St. Louis Rams")){
+                winnerIMG.setImageResource(teamHelmetArrayList.get(30).getHelmet());
+            }
+            else if (teamHelmetArrayList.get(i).getName().equals(superBowl.getWinner())){
                 winnerIMG.setImageResource(teamHelmetArrayList.get(i).getHelmet());
+            }
+
+
+            if(superBowl.getLoser().equals("Baltimore Colts")){
+                looserIMG.setImageResource(teamHelmetArrayList.get(10).getHelmet());
+            }
+            else if(superBowl.getLoser().equals("Los Angeles Raiders")){
+                looserIMG.setImageResource(teamHelmetArrayList.get(16).getHelmet());
+            }
+            else if(superBowl.getLoser().equals("St. Louis Rams")){
+                looserIMG.setImageResource(teamHelmetArrayList.get(30).getHelmet());
             }
             else if(teamHelmetArrayList.get(i).getName().equals(superBowl.getLoser())){
                 looserIMG.setImageResource(teamHelmetArrayList.get(i).getHelmet());
