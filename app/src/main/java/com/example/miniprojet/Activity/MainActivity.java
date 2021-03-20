@@ -460,6 +460,16 @@ public class MainActivity extends AppCompatActivity {
                     else {
                         setDarkmode();
                     }
+
+                    if(filter.isEmpty()){
+                        filter.clear();
+                        currentTeam = teamHelmetArrayList.get(0);
+                        setUpList(superBowlArrayList,currentTeam.getColor());
+                    }
+                    else{
+                        filter.clear();
+                        filter(currentTeam.getName(),currentTeam.getColor());
+                    }
                 }
                 break;
         }
